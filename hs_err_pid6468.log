@@ -1,0 +1,202 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 67108864 bytes for Failed to commit area from 0x00000000c0200000 to 0x00000000c4200000 of length 67108864.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (t:/workspace/open/src/hotspot/os/windows/os_windows.cpp:3254), pid=6468, tid=2996
+#
+# JRE version:  (12.0.1+12) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (12.0.1+12, mixed mode, aot, sharing, tiered, compressed oops, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2019.1.3\lib\idea_rt.jar=59646:C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2019.1.3\bin -Dfile.encoding=UTF-8 com.intellij.rt.execution.junit.JUnitStarter -ideVersion5 -junit5 @w@C:\Users\acachenaut\AppData\Local\Temp\idea_working_dirs_junit.tmp @C:\Users\acachenaut\AppData\Local\Temp\idea_junit.tmp -socket59645
+
+Host: Intel(R) Xeon(R) Gold 6148 CPU @ 2.40GHz, 2 cores, 3G,  Windows 10 , 64 bit Build 17763 (10.0.17763.475)
+Time: Fri Jan 31 17:38:54 2020 Paris, Madrid elapsed time: 0 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001ea7cbab000):  JavaThread "Unknown thread" [_thread_in_vm, id=2996, stack(0x0000005eee200000,0x0000005eee300000)]
+
+Stack: [0x0000005eee200000,0x0000005eee300000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x63948a]
+V  [jvm.dll+0x78b31f]
+V  [jvm.dll+0x78c9c1]
+V  [jvm.dll+0x78d013]
+V  [jvm.dll+0x262138]
+V  [jvm.dll+0x63698a]
+V  [jvm.dll+0x62b505]
+V  [jvm.dll+0x31d9bc]
+V  [jvm.dll+0x31d7ef]
+V  [jvm.dll+0x323526]
+V  [jvm.dll+0x370f76]
+V  [jvm.dll+0x370750]
+V  [jvm.dll+0x2f786a]
+V  [jvm.dll+0x2f8af2]
+V  [jvm.dll+0x7657b7]
+V  [jvm.dll+0x766e95]
+V  [jvm.dll+0x37f089]
+V  [jvm.dll+0x749b14]
+V  [jvm.dll+0x3ee48d]
+V  [jvm.dll+0x3f03c1]
+C  [jli.dll+0x51cf]
+C  [ucrtbase.dll+0x21ffa]
+C  [KERNEL32.DLL+0x17974]
+C  [ntdll.dll+0x6a271]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffeb65448e8, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x000001ea7cbd6000 GCTaskThread "GC Thread#0" [stack: 0x0000005eee400000,0x0000005eee500000] [id=596]
+  0x000001ea7cbdd800 ConcurrentGCThread "G1 Main Marker" [stack: 0x0000005eee500000,0x0000005eee600000] [id=6096]
+  0x000001ea7cbde800 ConcurrentGCThread "G1 Conc#0" [stack: 0x0000005eee600000,0x0000005eee700000] [id=848]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffeb5d77a37]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x000001ea7cba69b0] Heap_lock - owner thread: 0x000001ea7cbab000
+
+Heap address: 0x00000000c0200000, size: 1022 MB, Compressed Oops mode: Non-zero based: 0x00000000c0200000
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff781270000 - 0x00007ff78127f000 	C:\Program Files\java\jdk\bin\java.exe
+0x00007ffef5810000 - 0x00007ffef59fd000 	C:\windows\SYSTEM32\ntdll.dll
+0x00007ffef3700000 - 0x00007ffef37b3000 	C:\windows\System32\KERNEL32.DLL
+0x00007ffef19e0000 - 0x00007ffef1c73000 	C:\windows\System32\KERNELBASE.dll
+0x00007ffef2430000 - 0x00007ffef252a000 	C:\windows\System32\ucrtbase.dll
+0x00007ffece130000 - 0x00007ffece148000 	C:\Program Files\java\jdk\bin\jli.dll
+0x00007ffef37c0000 - 0x00007ffef3863000 	C:\windows\System32\ADVAPI32.dll
+0x00007ffef31e0000 - 0x00007ffef327e000 	C:\windows\System32\msvcrt.dll
+0x00007ffef2b60000 - 0x00007ffef2bfe000 	C:\windows\System32\sechost.dll
+0x00007ffef2a30000 - 0x00007ffef2b52000 	C:\windows\System32\RPCRT4.dll
+0x00007ffef4140000 - 0x00007ffef42d7000 	C:\windows\System32\USER32.dll
+0x00007ffef19c0000 - 0x00007ffef19e0000 	C:\windows\System32\win32u.dll
+0x00007ffef40b0000 - 0x00007ffef40d9000 	C:\windows\System32\GDI32.dll
+0x00007ffef27e0000 - 0x00007ffef2979000 	C:\windows\System32\gdi32full.dll
+0x00007ffef18d0000 - 0x00007ffef1970000 	C:\windows\System32\msvcp_win.dll
+0x00007ffece1b0000 - 0x00007ffece1c6000 	C:\Program Files\java\jdk\bin\VCRUNTIME140.dll
+0x00007ffeefbc0000 - 0x00007ffeefe39000 	C:\windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17763.914_none_05b346b2072102f2\COMCTL32.dll
+0x00007ffef3940000 - 0x00007ffef3c6c000 	C:\windows\System32\combase.dll
+0x00007ffef2530000 - 0x00007ffef25ae000 	C:\windows\System32\bcryptPrimitives.dll
+0x00007ffef14b0000 - 0x00007ffef14ba000 	C:\windows\SYSTEM32\VERSION.dll
+0x00007ffef3870000 - 0x00007ffef389e000 	C:\windows\System32\IMM32.DLL
+0x00007ffef16c0000 - 0x00007ffef16f8000 	C:\Program Files\Citrix\System32\MfApHook64.dll
+0x00007ffef1600000 - 0x00007ffef1612000 	C:\Program Files\Citrix\IcaService\FullScreenHook64.dll
+0x00007ffecc4d0000 - 0x00007ffecc57a000 	C:\Program Files\java\jdk\bin\MSVCP140.dll
+0x00007ffef0e80000 - 0x00007ffef0eaa000 	C:\Program Files\Citrix\ICAService\ShellHook64.dll
+0x00007ffef3180000 - 0x00007ffef31d2000 	C:\windows\System32\SHLWAPI.dll
+0x00007ffef0ed0000 - 0x00007ffef0fda000 	C:\Program Files\Citrix\IcaService\SCardHook64.dll
+0x00007ffef0aa0000 - 0x00007ffef0ac0000 	C:\Program Files\Citrix\ICAService\cxinjime64.dll
+0x00007ffeb5a70000 - 0x00007ffeb65e4000 	C:\Program Files\java\jdk\bin\server\jvm.dll
+0x00007ffef3930000 - 0x00007ffef3938000 	C:\windows\System32\PSAPI.DLL
+0x00007ffed3670000 - 0x00007ffed3679000 	C:\windows\SYSTEM32\WSOCK32.dll
+0x00007ffef38c0000 - 0x00007ffef392d000 	C:\windows\System32\WS2_32.dll
+0x00007ffeeafd0000 - 0x00007ffeeaff4000 	C:\windows\SYSTEM32\WINMM.dll
+0x00007ffeea1a0000 - 0x00007ffeea1cd000 	C:\windows\SYSTEM32\WINMMBASE.dll
+0x00007ffef1970000 - 0x00007ffef19ba000 	C:\windows\System32\cfgmgr32.dll
+0x00007ffef1800000 - 0x00007ffef1811000 	C:\windows\System32\kernel.appcore.dll
+0x00007ffecdfb0000 - 0x00007ffecdfc1000 	C:\Program Files\java\jdk\bin\verify.dll
+0x00007ffeef470000 - 0x00007ffeef65d000 	C:\windows\SYSTEM32\DBGHELP.DLL
+0x00007ffecc4a0000 - 0x00007ffecc4ca000 	C:\windows\SYSTEM32\dbgcore.DLL
+0x00007ffecc270000 - 0x00007ffecc296000 	C:\Program Files\java\jdk\bin\java.dll
+0x00007ffee61f0000 - 0x00007ffee61fe000 	C:\Program Files\java\jdk\bin\instrument.dll
+0x00007ffecc480000 - 0x00007ffecc497000 	C:\Program Files\java\jdk\bin\zip.dll
+0x00007ffed6980000 - 0x00007ffed698a000 	C:\Program Files\java\jdk\bin\jimage.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\java\jdk\bin;C:\windows\SYSTEM32;C:\windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17763.914_none_05b346b2072102f2;C:\Program Files\Citrix\System32;C:\Program Files\Citrix\IcaService;C:\Program Files\java\jdk\bin\server
+
+VM Arguments:
+jvm_args: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2019.1.3\lib\idea_rt.jar=59646:C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2019.1.3\bin -Dfile.encoding=UTF-8 
+java_command: com.intellij.rt.execution.junit.JUnitStarter -ideVersion5 -junit5 @w@C:\Users\acachenaut\AppData\Local\Temp\idea_working_dirs_junit.tmp @C:\Users\acachenaut\AppData\Local\Temp\idea_junit.tmp -socket59645
+java_class_path (initial): C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2019.1.3\lib\idea_rt.jar;C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2019.1.3\plugins\junit\lib\junit-rt.jar;C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2019.1.3\plugins\junit\lib\junit5-rt.jar;C:\Users\acachenaut\.m2\repository\org\junit\platform\junit-platform-launcher\1.6.0\junit-platform-launcher-1.6.0.jar;C:\Users\acachenaut\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\acachenaut\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;C:\Users\acachenaut\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\acachenaut\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\acachenaut\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\acachenaut\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\acachenaut\.m2\repository\org\junit\vintage\junit-vintage-engine\5.6.0\junit-vintage-engine-5.6.0.jar;C:\Users\acachenaut\.m2\repository\junit\junit\4.13\junit-4.13.jar;C:\Users\acachenaut\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;F:\Documents\1-M41\M4104C-AgiliteEtBonnePratique\Citadels\build\classes\java\main;C:\Users\acachenaut\.gradle\caches\modules-2\files-2.1\io.vavr\vavr\0.9.2\8a1ef529bdae2adcacd82fa0a8d666e76a73b2ac\vavr-0.9.2.jar;C:\Users\acachenaut\.gradle\caches\modules-2\files-2.1\io.vavr\vavr-match\0.9.2\7249950c1c81250132c767dddbc564ec4593890a\vavr-match-0.9.2.jar;C:\Users\acachenaut\.gradle\caches\modules-2\files-2.1\junit\junit\4.12\2973d150c0dc1fefe998f834810d68f278ea58ec\junit-4.12.jar;C:\Users\acachenaut\.gradle\caches\modules-2\files-2.1\org.assertj\assertj-core\3.11.1\fdac3217b804d6900fa3650f17b5cb48e620b140\assertj-core-3.11.1.jar;C:\Users\acachenaut\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcr
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 2                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 2                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 67108864                                  {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1071644672                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5825164                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122916538                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122916538                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+PATH=C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\PuTTY\;C:\Program Files\Microsoft VS Code\bin;C:\Users\Administrateur\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrateur\AppData\Roaming\npm;C:\oracleclient\instantclient_12_1;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Citrix\System32\;C:\Program Files\Citrix\ICAService\;C:\Users\acachenaut\AppData\Local\Microsoft\WindowsApps;
+USERNAME=acachenaut
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 85 Stepping 4, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 17763 (10.0.17763.475)
+
+CPU:total 2 (initial active 2) (4 cores per cpu, 1 threads per core) family 6 model 85 stepping 4, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, rtm, 3dnowpref, lzcnt, tsc, bmi1, bmi2, adx, fma
+
+Memory: 4k page, system-wide physical 4087M (195M free)
+TotalPageFile size 5367M (AvailPageFile size 53M)
+current process WorkingSet (physical memory assigned to process): 11M, peak: 11M
+current process commit charge ("private bytes"): 48M, peak: 112M
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (12.0.1+12) for windows-amd64 JRE (12.0.1+12), built on Apr  2 2019 14:02:19 by "mach5one" with MS VC++ 15.5 (VS2017)
+
+END.
