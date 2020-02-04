@@ -9,7 +9,7 @@ class CityTest {
     public void testCoutConstructionQuartiers(){
         Board board = new Board();
         City city = new City(board);
-        Possession possession=new Possession(0,null);//le score est à 0;
+        Possession possession=new Possession(0,null);//le score est à 0
         city.buildDistrict(Card.HARBOR_3);//+4
         city.buildDistrict(Card.CATHEDRAL_1);//+5
         city.buildDistrict(Card.BATTLEFIELD_3);//+3
@@ -22,7 +22,7 @@ class CityTest {
     public void testCoutConstructionAvecBonusDifferentsTypesQuartiers(){
         Board board = new Board();
         City city = new City(board);
-        Possession possession=new Possession(0,null);//le score est à 0;
+        Possession possession=new Possession(0,null);//le score est à 0
         city.buildDistrict(Card.HARBOR_3);//+4
         city.buildDistrict(Card.CATHEDRAL_1);//+5
         city.buildDistrict(Card.BATTLEFIELD_3);//+3
@@ -33,10 +33,10 @@ class CityTest {
     }
 
     @Test
-    public void testCoutConstructionAvecBonusCiteComplete(){
+    public void testCoutConstructionAvecBonusCiteCompleteDeuxiemeJoueur(){
         Board board = new Board();
         City city = new City(board);
-        Possession possession=new Possession(0,null);//le score est à 0;
+        Possession possession=new Possession(0,null);//le score est à 0
         city.buildDistrict(Card.MANOR_1);//+3
         city.buildDistrict(Card.CASTLE_1);//+4
         city.buildDistrict(Card.PALACE_1);//+5
@@ -44,8 +44,19 @@ class CityTest {
         city.buildDistrict(Card.PRISON_1);//+2
         city.buildDistrict(Card.BATTLEFIELD_1);//+3
         city.buildDistrict(Card.FORTRESS_1);//+5
-        int score=city.score(possession);//le score devrait valoir 23 + 4 pts bonus
-        assert (score==27);
+
+        Possession possessionJ2=new Possession(0,null);//le score est à 0
+        city.buildDistrict(Card.MANOR_2);//+3
+        city.buildDistrict(Card.CASTLE_2);//+4
+        city.buildDistrict(Card.PALACE_2);//+5
+        city.buildDistrict(Card.WATCHTOWER_2);//+1
+        city.buildDistrict(Card.PRISON_2);//+2
+        city.buildDistrict(Card.BATTLEFIELD_2);//+3
+        city.buildDistrict(Card.FORTRESS_2);//+5
+        int score=city.score(possessionJ2);//le score devrait valoir 23 + 2 pts bonus
+        assert (score==25);
     }
+
+
 
 }
