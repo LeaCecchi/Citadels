@@ -57,6 +57,19 @@ class CityTest {
         assert (score==25);
     }
 
+    @Test
+    public void testCoutConstructionAvecBonusMerveilles(){
+        Board board = new Board();
+        City city = new City(board);
+        Possession possession=new Possession(0,null);//le score est à 0
+        city.buildDistrict(Card.HARBOR_3);//+4
+        city.buildDistrict(Card.CATHEDRAL_1);//+5
+        city.buildDistrict(Card.BATTLEFIELD_3);//+3
+        city.buildDistrict(Card.DRAGON_GATE);//construction +6 et bonus score +2
+        int score=city.score(possession);//le score devrait valoir 20
+        assert (score==20);
+    }
+
 
 
 }
