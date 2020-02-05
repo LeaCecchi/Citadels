@@ -39,7 +39,6 @@ class CityTest {
         Board board = new Board();
         City city = new City(board);
         Possession possession=new Possession(0,null);//le score est à 0
-        board.mark(city);
         city.buildDistrict(Card.MANOR_1);//+3
         city.buildDistrict(Card.CASTLE_1);//+4
         city.buildDistrict(Card.PALACE_1);//+5
@@ -48,9 +47,9 @@ class CityTest {
         city.buildDistrict(Card.BATTLEFIELD_1);//+3
         city.buildDistrict(Card.FORTRESS_1);//+5
         int score=city.score(possession);//le score devrait valoir 23 + 4 pts bonus
-
-        assertThat(score).isEqualTo(27);
-
+        if(board.isFirst(city)) {
+            assertThat(score).isEqualTo(27);
+        }
     }
 
     @Test
