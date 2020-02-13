@@ -32,22 +32,29 @@ public class City {
 
     public int score(Possession possession) {
         int score = 0;
-        for (int a = 0; a < districts().size(); a++) {
-            score += districts().get(a).cost();
-        }
-
-        score = score + districtsScoreBonus(possession);
-        if (winsAllColorBonus()) {
-            score += 3;
-        }
-        if (board.isFirst(this)) {
-            score += (2);
-        }
-        if (isComplete()) {
-            score += (2);
-        }
+        score += totalConstructionCost();
+        score += bonusScore(possession);
         return score;
     }
+
+    private int bonusScore(Possession possession){
+        int bonus = 0;
+        if (hasAllDifferentDistrictTypes()) { bonus += 3; }
+        if (board.isFirstPlayerToFinish(this)) { bonus += 2; }
+        if (isComplete()) { bonus += 2; }
+        bonus += districtsScoreBonus(possession);
+        return bonus;
+    }
+
+    private int totalConstructionCost (){
+        int totalCost =0;
+        for (District district : districts()) {
+            totalCost+=district.cost();
+        }
+        return  totalCost;
+        }
+
+
 
     private int districtsScoreBonus(Possession possession) {
         int score = 0;
@@ -68,7 +75,7 @@ public class City {
         return score;
     }
 
-    private boolean winsAllColorBonus() {
+    private boolean hasAllDifferentDistrictTypes() {
         int districtTypes[] = new int[DistrictType.values().length];
         for (District d : districts()) {
             districtTypes[d.districtType().ordinal()]++;

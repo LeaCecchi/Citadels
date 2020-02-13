@@ -47,7 +47,7 @@ class CityTest {
         city.buildDistrict(Card.BATTLEFIELD_1);//+3
         city.buildDistrict(Card.FORTRESS_1);//+5
         int score=city.score(possession);//le score devrait valoir 23 + 4 pts bonus
-        if(board.isFirst(city)) {
+        if(board.isFirstPlayerToFinish(city)) {
             assertThat(score).isEqualTo(27);
         }
     }
@@ -65,7 +65,7 @@ class CityTest {
         city.buildDistrict(Card.BATTLEFIELD_1);//+3
         city.buildDistrict(Card.FORTRESS_1);//+5
         int score=city.score(possession); // le score doit valoir 23 + 2pts
-        if(city.isComplete() && !board.isFirst(city)) {
+        if(city.isComplete() && !board.isFirstPlayerToFinish(city)) {
             assertThat(score).isEqualTo(25);
         }
     }
