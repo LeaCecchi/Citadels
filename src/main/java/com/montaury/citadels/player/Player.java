@@ -15,6 +15,7 @@ public class Player {
     public Set<Card> cards = HashSet.empty();
     public boolean isHuman = false;
 
+
     public Player(String name, int age, City city, PlayerController controller) {
         this.name = name;
         this.age = age;
