@@ -57,7 +57,7 @@ public class Citadels {
             Collections.rotate(list, -players.indexOf(crown));
             List<Player> playersInOrder = List.ofAll(list);
             RandomCharacterSelector randomCharacterSelector = new RandomCharacterSelector();
-            List<Character> availableCharacters = List.of(Character.ASSASSIN, Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD,Character.BAILIFF);
+            List<Character> availableCharacters = List.of(Character.ASSASSIN, Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD,Character.BAILIFF,Character.ALCHEMIST);
 
             List<Character> availableCharacters1 = availableCharacters;
             List<Character> discardedCharacters = List.empty();
@@ -92,7 +92,7 @@ public class Citadels {
 
             bailiff = associations.find(a -> a.character == Character.BAILIFF).map(Group::player).getOrNull();
 
-            for (int iii = 0; iii < 8; iii++) {
+            for (int iii = 0; iii < 10; iii++) {
                 for (int ii = 0; ii < associations.size(); ii++) {
                     if (iii + 1 == associations.get(ii).character.number()) {
                         if (!associations.get(ii).isMurdered()){
@@ -203,13 +203,14 @@ public class Citadels {
                                     Card card = group.player().controller.selectAmong(group.player().buildableDistrictsInHand());
                                     boolean districtIsBuild;
                                     districtIsBuild = group.player().buildDistrict(card);
+                                    card.district().cost();
                                     if (districtIsBuild){
-                                        if (group.player().gold()>0 && group.isNot(Character.BAILIFF)){
+                                        if(!group.isNot(Character.ALCHEMIST)){
+                                            group.player().add(card.district().cost());
+                                        }
+                                        if (group.player().gold()>0 && group.isNot(Character.BAILIFF) && bailiff!=null){
                                             group.player().pay(1);
-                                            if (bailiff!=null){
-                                                bailiff.add(1);
-                                            }
-
+                                            bailiff.add(1);
                                         }
                                     }
 
@@ -235,7 +236,7 @@ public class Citadels {
                                     group.player().exchangeHandWith(playerToSwapWith);
                                     }
                                     else if (actionType1 == "Kill") {
-                                    Character characterToMurder = group.player().controller.selectAmong(List.of(Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD, Character.BAILIFF));
+                                    Character characterToMurder = group.player().controller.selectAmong(List.of(Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD, Character.BAILIFF,Character.ALCHEMIST));
                                     groups.associationToCharacter(characterToMurder).peek(Group::murder);
                                     }
                                     else if (actionType1 == "Pick 2 cards") {
