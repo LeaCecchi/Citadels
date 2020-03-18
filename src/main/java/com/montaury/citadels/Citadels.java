@@ -34,10 +34,22 @@ public class Citadels {
         List<Player> players = List.of(p);
         System.out.println("Saisir le nombre de joueurs total (entre 2 et 8): ");
         int nbP;
+        int choiceTaxCollectorOrThief;
+        int choiceAlchemistOrMarchand;
 
         do {
             nbP = scanner.nextInt();
         } while (nbP < 2 || nbP > 8);
+
+        System.out.println("Voulez vous jouer avec le Tax Collector ou le Thief ? (0 pour Tax Collector , 1 pour Thief)") ;
+        do {
+            choiceTaxCollectorOrThief = scanner.nextInt();
+        } while (choiceTaxCollectorOrThief < 0 || choiceTaxCollectorOrThief > 1);
+
+        System.out.println("Voulez vous jouer avec l'Alchemist ou le Merchant ? (0 pour Alchemist, 1 pour Merchant)") ;
+        do {
+            choiceAlchemistOrMarchand = scanner.nextInt();
+        } while (choiceAlchemistOrMarchand < 0 || choiceAlchemistOrMarchand > 1);
         for (int joueurs = 0; joueurs < nbP; joueurs += 1) {
             Player player = new Player("Computer " + joueurs, 35, new City(board), new ComputerController());
             player.isHuman = false;
@@ -49,8 +61,23 @@ public class Citadels {
             player.add(pioche.draw(2));
         });
         Player crown = players.maxBy(Player::age).get();
-
         Player taxCollector;
+
+        Character taxCollectorOrThief;
+        if (choiceTaxCollectorOrThief==0){
+            taxCollectorOrThief=Character.TAXCOLLECTOR;
+        }
+        else {
+            taxCollectorOrThief=Character.THIEF;
+        }
+
+        Character alchemistOrMerchant;
+        if (choiceAlchemistOrMarchand==0){
+            alchemistOrMerchant=Character.ALCHEMIST;
+        }
+        else {
+            alchemistOrMerchant=Character.MERCHANT;
+        }
 
         List<Group> roundAssociations;
         do {
@@ -58,7 +85,7 @@ public class Citadels {
             Collections.rotate(list, -players.indexOf(crown));
             List<Player> playersInOrder = List.ofAll(list);
             RandomCharacterSelector randomCharacterSelector = new RandomCharacterSelector();
-            List<Character> availableCharacters = List.of(Character.ASSASSIN, Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD,Character.TAXCOLLECTOR,Character.ALCHEMIST);
+            List<Character> availableCharacters = List.of(Character.ASSASSIN, taxCollectorOrThief, Character.MAGICIAN, Character.KING, Character.BISHOP, alchemistOrMerchant, Character.ARCHITECT, Character.WARLORD);
 
             List<Character> availableCharacters1 = availableCharacters;
             List<Character> discardedCharacters = List.empty();
