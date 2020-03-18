@@ -120,7 +120,7 @@ public class Citadels {
 
             taxCollector = associations.find(a -> a.character == Character.TAXCOLLECTOR).map(Group::player).getOrNull();
 
-            for (int iii = 0; iii < 10; iii++) {
+            for (int iii = 0; iii < 8; iii++) {
                 for (int ii = 0; ii < associations.size(); ii++) {
                     if (iii + 1 == associations.get(ii).character.number()) {
                         if (!associations.get(ii).isMurdered()){
