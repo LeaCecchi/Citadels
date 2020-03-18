@@ -34,6 +34,7 @@ public class Citadels {
         List<Player> players = List.of(p);
         System.out.println("Saisir le nombre de joueurs total (entre 2 et 8): ");
         int nbP;
+
         do {
             nbP = scanner.nextInt();
         } while (nbP < 2 || nbP > 8);
@@ -49,7 +50,7 @@ public class Citadels {
         });
         Player crown = players.maxBy(Player::age).get();
 
-        Player bailiff;
+        Player taxCollector;
 
         List<Group> roundAssociations;
         do {
@@ -57,7 +58,7 @@ public class Citadels {
             Collections.rotate(list, -players.indexOf(crown));
             List<Player> playersInOrder = List.ofAll(list);
             RandomCharacterSelector randomCharacterSelector = new RandomCharacterSelector();
-            List<Character> availableCharacters = List.of(Character.ASSASSIN, Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD,Character.BAILIFF,Character.ALCHEMIST);
+            List<Character> availableCharacters = List.of(Character.ASSASSIN, Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD,Character.TAXCOLLECTOR,Character.ALCHEMIST);
 
             List<Character> availableCharacters1 = availableCharacters;
             List<Character> discardedCharacters = List.empty();
@@ -90,7 +91,7 @@ public class Citadels {
             List<Group> associations = associations1;
             GameRoundAssociations groups = new GameRoundAssociations(associations);
 
-            bailiff = associations.find(a -> a.character == Character.BAILIFF).map(Group::player).getOrNull();
+            taxCollector = associations.find(a -> a.character == Character.TAXCOLLECTOR).map(Group::player).getOrNull();
 
             for (int iii = 0; iii < 10; iii++) {
                 for (int ii = 0; ii < associations.size(); ii++) {
@@ -203,14 +204,13 @@ public class Citadels {
                                     Card card = group.player().controller.selectAmong(group.player().buildableDistrictsInHand());
                                     boolean districtIsBuild;
                                     districtIsBuild = group.player().buildDistrict(card);
-                                    card.district().cost();
                                     if (districtIsBuild){
                                         if(!group.isNot(Character.ALCHEMIST)){
                                             group.player().add(card.district().cost());
                                         }
-                                        if (group.player().gold()>0 && group.isNot(Character.BAILIFF) && bailiff!=null){
+                                        if (group.player().gold()>0 && group.isNot(Character.TAXCOLLECTOR) && taxCollector!=null){
                                             group.player().pay(1);
-                                            bailiff.add(1);
+                                            taxCollector.add(1);
                                         }
                                     }
 
@@ -236,7 +236,7 @@ public class Citadels {
                                     group.player().exchangeHandWith(playerToSwapWith);
                                     }
                                     else if (actionType1 == "Kill") {
-                                    Character characterToMurder = group.player().controller.selectAmong(List.of(Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD, Character.BAILIFF,Character.ALCHEMIST));
+                                    Character characterToMurder = group.player().controller.selectAmong(List.of(Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD, Character.TAXCOLLECTOR,Character.ALCHEMIST));
                                     groups.associationToCharacter(characterToMurder).peek(Group::murder);
                                     }
                                     else if (actionType1 == "Pick 2 cards") {
