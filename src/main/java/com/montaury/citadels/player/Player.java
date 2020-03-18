@@ -64,13 +64,14 @@ public class Player {
         return cards.filter(this::canBuildDistrict);
     }
 
-    public void buildDistrict(Card card) {
+    public boolean buildDistrict(Card card) {
         if (!canBuildDistrict(card)) {
-            return;
+            return false;
         }
         cards = cards.remove(card);
         city.buildDistrict(card);
         gold -= (card.district().cost());
+        return true;
     }
 
     public int score() {

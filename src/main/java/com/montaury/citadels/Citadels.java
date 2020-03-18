@@ -17,6 +17,8 @@ import io.vavr.collection.List;
 import io.vavr.collection.Set;
 
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Citadels {
@@ -47,13 +49,15 @@ public class Citadels {
         });
         Player crown = players.maxBy(Player::age).get();
 
+        Player bailiff;
+
         List<Group> roundAssociations;
         do {
             java.util.List<Player> list = players.asJavaMutable();
             Collections.rotate(list, -players.indexOf(crown));
             List<Player> playersInOrder = List.ofAll(list);
             RandomCharacterSelector randomCharacterSelector = new RandomCharacterSelector();
-            List<Character> availableCharacters = List.of(Character.ASSASSIN, Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD);
+            List<Character> availableCharacters = List.of(Character.ASSASSIN, Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD,Character.BAILIFF);
 
             List<Character> availableCharacters1 = availableCharacters;
             List<Character> discardedCharacters = List.empty();
@@ -86,10 +90,12 @@ public class Citadels {
             List<Group> associations = associations1;
             GameRoundAssociations groups = new GameRoundAssociations(associations);
 
+            bailiff = associations.find(a -> a.character == Character.BAILIFF).map(Group::player).getOrNull();
+
             for (int iii = 0; iii < 8; iii++) {
                 for (int ii = 0; ii < associations.size(); ii++) {
                     if (iii + 1 == associations.get(ii).character.number()) {
-                        if (associations.get(ii).isMurdered()) {}else{
+                        if (!associations.get(ii).isMurdered()){
                             Group group = associations.get(ii);
                             associations.get(ii).thief().peek(thief -> thief.steal(group.player()));
                             Set<String> baseActions = HashSet.of("Draw 2 cards and keep 1", "Receive 2 coins");
@@ -195,7 +201,18 @@ public class Citadels {
                                 // execute selected action
                                 if (actionType1 == "Build district") {
                                     Card card = group.player().controller.selectAmong(group.player().buildableDistrictsInHand());
-                                    group.player().buildDistrict(card);
+                                    boolean districtIsBuild;
+                                    districtIsBuild = group.player().buildDistrict(card);
+                                    if (districtIsBuild){
+                                        if (group.player().gold()>0 && group.isNot(Character.BAILIFF)){
+                                            group.player().pay(1);
+                                            if (bailiff!=null){
+                                                bailiff.add(1);
+                                            }
+
+                                        }
+                                    }
+
                                     }
                                 else if (actionType1 == "Discard card for 2 coins") {
                                     Player player = group.player();
@@ -218,7 +235,7 @@ public class Citadels {
                                     group.player().exchangeHandWith(playerToSwapWith);
                                     }
                                     else if (actionType1 == "Kill") {
-                                    Character characterToMurder = group.player().controller.selectAmong(List.of(Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD));
+                                    Character characterToMurder = group.player().controller.selectAmong(List.of(Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD, Character.BAILIFF));
                                     groups.associationToCharacter(characterToMurder).peek(Group::murder);
                                     }
                                     else if (actionType1 == "Pick 2 cards") {
