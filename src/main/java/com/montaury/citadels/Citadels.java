@@ -33,13 +33,13 @@ public class Citadels {
         p.isHuman = true;
         List<Player> players = List.of(p);
         System.out.println("Saisir le nombre de joueurs total (entre 2 et 8): ");
-        int nbP;
+        int nbPlayer;
         int choiceTaxCollectorOrThief;
         int choiceAlchemistOrMarchand;
 
         do {
-            nbP = scanner.nextInt();
-        } while (nbP < 2 || nbP > 8);
+            nbPlayer = scanner.nextInt();
+        } while (nbPlayer < 2 || nbPlayer > 8);
 
         System.out.println("Voulez vous jouer avec le Tax Collector ou le Thief ? (0 pour Tax Collector , 1 pour Thief)") ;
         do {
@@ -50,7 +50,7 @@ public class Citadels {
         do {
             choiceAlchemistOrMarchand = scanner.nextInt();
         } while (choiceAlchemistOrMarchand < 0 || choiceAlchemistOrMarchand > 1);
-        for (int joueurs = 0; joueurs < nbP; joueurs += 1) {
+        for (int joueurs = 0; joueurs < nbPlayer-1; joueurs += 1) {
             Player player = new Player("Computer " + joueurs, 35, new City(board), new ComputerController());
             player.isHuman = false;
             players = players.append(player);
